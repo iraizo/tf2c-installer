@@ -96,8 +96,8 @@ def restartSteam():
     exit(0)
 
 
-#osCheck()
-#downloadFiles()
-#unzipFiles()
+osCheck()
+downloadFiles()
+unzipFiles()
 moveFiles()
-#restartSteam()
+restartSteam()
