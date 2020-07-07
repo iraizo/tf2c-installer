@@ -50,11 +50,30 @@ def unzipFiles():
     print("Done!")
 
 
+if osCheck: # on windows
+    import winreg
+    from winreg import HKEY_CURRENT_USER
+else:
+    # import linux library or something 
+    exit(0)
+
 def moveFiles():
-    common_path = r"C:\Program Files (x86)\Steam\steamapps\sourcemods" # windows
-    if os.path.exists(common_path):
+    path = ""
+    if osCheck:
+        try:
+            registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam", 0, winreg.KEY_READ)
+            path = winreg.QueryValueEx(registry_key, r"SourceModInstallPath")
+            winreg.CloseKey(registry_key)
+            
+        except WindowsError:
+            return None
+    else:
+        if os.path.exists("~/.steam/steam/steamapps/sourcemods"):
+            path = "~/.steam/steam/steamapps/sourcemods"
+
+    if os.path.exists(path):
         print("Found sourcemods folder, moving files..")
-        shutil.move("tf2classic", common_path)
+        shutil.move("tf2classic", path)
         print("Done!")
     else:  
         print("sourcemods folder could not be found, can you input the full path of the sourcemods folder?")
@@ -77,8 +96,8 @@ def restartSteam():
     exit(0)
 
 
-osCheck()
-downloadFiles()
-unzipFiles()
+#osCheck()
+#downloadFiles()
+#unzipFiles()
 moveFiles()
-restartSteam()
+#restartSteam()
