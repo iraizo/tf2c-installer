@@ -71,9 +71,9 @@ def moveFiles():
         if os.path.exists("~/.steam/steam/steamapps/sourcemods"):
             path = "~/.steam/steam/steamapps/sourcemods"
 
-    if os.path.exists(path):
+    if os.path.exists(path[0]):
         print("Found sourcemods folder, moving files..")
-        shutil.move("tf2classic", path)
+        shutil.move("tf2classic", path[0])
         print("Done!")
     else:  
         print("sourcemods folder could not be found, can you input the full path of the sourcemods folder?")
