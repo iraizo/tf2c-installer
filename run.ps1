@@ -10,7 +10,7 @@ function install_pip {
 
 function install_dependencies {
     Write-Host "Installing dependencies"
-    $dependencies = @("requests", "tqdm","patool","pyunpack","psutil","winreg")
+    $dependencies = @("requests", "tqdm","patool","pyunpack","psutil")
     for($i=0; $i -lt $dependencies.length; $i++) {
         pip install $dependencies[$i]
     }
